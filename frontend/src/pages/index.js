@@ -1,0 +1,10 @@
+export { default as SummaryDashboard } from './SummaryDashboard';
+export { default as AgentPerformance } from './AgentPerformance';
+export { default as DealsPage } from './Deals';
+export { default as CampaignsPage } from './Campaigns';
+export { default as CallCampaignsPage } from './CallCampaigns';
+export { default as CallAnalyticsPage } from './CallAnalytics';
+export { default as MailCampaignsPage } from './MailCampaigns';
+export { default as MailAnalyticsPage } from './MailAnalytics';
+export { default as TextAnalyticsPage } from './TextAnalytics';
+export { default as ExpensesPage } from './Expenses';

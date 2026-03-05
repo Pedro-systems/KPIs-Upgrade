@@ -1,0 +1,24 @@
+{
+  "name": "upgrade-kpis-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KPI Management System - Backend + Frontend",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "npm run build:frontend",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build:backend": "cd backend && npm install",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run preview",
+    "vercel-build": "cd frontend && npm install && npm run build"
+  },
+  "keywords": ["kpi", "dashboard", "analytics"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
