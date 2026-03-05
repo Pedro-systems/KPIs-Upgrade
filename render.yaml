@@ -1,0 +1,41 @@
+services:
+  # Backend API
+  - type: web
+    name: upgrade-kpis-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: USE_SSH_TUNNEL
+        value: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: SSH_HOST
+        sync: false
+      - key: SSH_PORT
+        value: 22
+      - key: SSH_USER
+        sync: false
+      - key: SSH_PRIVATE_KEY_PATH
+        sync: false
+      - key: SSH_FORWARD_PORT
+        value: 5432
+      - key: SSH_FORWARD_HOST
+        value: localhost
