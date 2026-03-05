@@ -84,7 +84,7 @@ const AgentPerformance = () => {
       const response = await datakpiApi.getDaily(params);
       setDailyData(response.data.data || []);
     } catch (error) {
-      toast.error('Erro ao carregar dados diários');
+      toast.error('Error loading daily data');
     } finally {
       setLoading(false);
     }
@@ -100,7 +100,7 @@ const AgentPerformance = () => {
       const response = await datakpiApi.getWeekly(params);
       setWeeklyData(response.data.data || []);
     } catch (error) {
-      toast.error('Erro ao carregar dados semanais');
+      toast.error('Error loading weekly data');
     } finally {
       setLoading(false);
     }
@@ -116,7 +116,7 @@ const AgentPerformance = () => {
       const response = await datakpiApi.getMonthly(params);
       setMonthlyData(response.data.data || []);
     } catch (error) {
-      toast.error('Erro ao carregar dados mensais');
+      toast.error('Error loading monthly data');
     } finally {
       setLoading(false);
     }
@@ -132,7 +132,7 @@ const AgentPerformance = () => {
       const response = await crossviewApi.getAgentPipeline(params);
       setPipelineData(response.data.data || []);
     } catch (error) {
-      toast.error('Erro ao carregar correlação com pipeline');
+      toast.error('Error loading pipeline correlation');
     } finally {
       setLoading(false);
     }
@@ -179,8 +179,8 @@ const AgentPerformance = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">📊 Performance de Agentes</h1>
-          <p className="text-gray-600">Métricas de atividade e resultados (DataKPI)</p>
+          <h1 className="text-3xl font-bold text-gray-900">📊 Agent Performance</h1>
+          <p className="text-gray-600">Activity and results metrics (DataKPI)</p>
         </div>
         <div className="flex items-center gap-4">
           <select
@@ -188,7 +188,7 @@ const AgentPerformance = () => {
             onChange={(e) => setSelectedAgent(e.target.value)}
             className="form-select text-sm font-medium"
           >
-            <option value="all">Todos os Agentes</option>
+            <option value="all">All Agents</option>
             {agents.map(agent => (
               <option key={agent.agent_name} value={agent.agent_name}>
                 {agent.agent_name}
@@ -210,18 +210,18 @@ const AgentPerformance = () => {
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <MetricCard
-          title="Total Agentes"
+          title="Total Agents"
           value={summary.totalAgents}
           colorScheme="info"
         />
         <MetricCard
-          title="Contratos Assinados"
+          title="Signed Contracts"
           value={formatNumber(summary.totalContracts, 0)}
           subtitle="All time"
           colorScheme="success"
         />
         <MetricCard
-          title="Ofertas Enviadas"
+          title="Offers Sent"
           value={formatNumber(summary.totalOffers, 0)}
           subtitle="All time"
           colorScheme="purple"
@@ -233,9 +233,9 @@ const AgentPerformance = () => {
           colorScheme="warning"
         />
         <MetricCard
-          title="Close Rate Médio"
+          title="Average Close Rate"
           value={formatPercent(summary.avgCloseRate * 100)}
-          subtitle="Todos agentes"
+          subtitle="All agents"
           colorScheme="info"
         />
       </div>
@@ -252,7 +252,7 @@ const AgentPerformance = () => {
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
-              📅 Mensal
+              📅 Monthly
             </button>
             <button
               onClick={() => setActiveTab('weekly')}
@@ -262,7 +262,7 @@ const AgentPerformance = () => {
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
-              📆 Semanal
+              📆 Weekly
             </button>
             <button
               onClick={() => setActiveTab('daily')}
@@ -272,7 +272,7 @@ const AgentPerformance = () => {
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
-              📋 Diário
+              📋 Daily
             </button>
             <button
               onClick={() => setActiveTab('pipeline')}
@@ -292,7 +292,7 @@ const AgentPerformance = () => {
           {loading ? (
             <div className="flex items-center justify-center py-12">
               <div className="spinner"></div>
-              <span className="ml-3 text-gray-600">Carregando dados...</span>
+              <span className="ml-3 text-gray-600">Loading data...</span>
             </div>
           ) : (
             <>
@@ -302,15 +302,15 @@ const AgentPerformance = () => {
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-4 py-3 text-left font-semibold text-gray-700">Agente</th>
-                        <th className="px-4 py-3 text-center font-semibold text-gray-700">Mês</th>
+                        <th className="px-4 py-3 text-left font-semibold text-gray-700">Agent</th>
+                        <th className="px-4 py-3 text-center font-semibold text-gray-700">Month</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">SMS</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">Cold Calls</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">Hot Leads</th>
-                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Ofertas</th>
-                        <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-green-50">Contratos</th>
+                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Offers</th>
+                        <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-green-50">Contracts</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">Close Rate</th>
-                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Dias Ativos</th>
+                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Active Days</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -337,7 +337,7 @@ const AgentPerformance = () => {
                   </table>
                   {monthlyData.length === 0 && (
                     <div className="text-center py-8 text-gray-500">
-                      Nenhum dado encontrado para o filtro selecionado
+                      No data found for the selected filter
                     </div>
                   )}
                 </div>
@@ -349,14 +349,14 @@ const AgentPerformance = () => {
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-4 py-3 text-left font-semibold text-gray-700">Agente</th>
-                        <th className="px-4 py-3 text-center font-semibold text-gray-700">Semana</th>
+                        <th className="px-4 py-3 text-left font-semibold text-gray-700">Agent</th>
+                        <th className="px-4 py-3 text-center font-semibold text-gray-700">Week</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">SMS</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">Cold Calls</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">Hot Leads</th>
-                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Ofertas</th>
-                        <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-green-50">Contratos</th>
-                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Dias Ativos</th>
+                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Offers</th>
+                        <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-green-50">Contracts</th>
+                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Active Days</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -364,7 +364,7 @@ const AgentPerformance = () => {
                         <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
                           <td className="px-4 py-3 font-medium text-gray-900">{row.agent_name}</td>
                           <td className="px-4 py-3 text-center text-gray-600">
-                            Sem {row.week_number} • {new Date(row.week_start).toLocaleDateString('pt-BR', { month: 'short', day: 'numeric' })}
+                            Week {row.week_number} • {new Date(row.week_start).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                           </td>
                           <td className="px-4 py-3 text-right">{formatNumber(row.total_sms_sent, 0)}</td>
                           <td className="px-4 py-3 text-right">{formatNumber(row.total_cold_calls, 0)}</td>
@@ -380,7 +380,7 @@ const AgentPerformance = () => {
                   </table>
                   {weeklyData.length === 0 && (
                     <div className="text-center py-8 text-gray-500">
-                      Nenhum dado encontrado para o filtro selecionado
+                      No data found for the selected filter
                     </div>
                   )}
                 </div>
@@ -392,13 +392,13 @@ const AgentPerformance = () => {
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-4 py-3 text-left font-semibold text-gray-700">Agente</th>
-                        <th className="px-4 py-3 text-center font-semibold text-gray-700">Data</th>
+                        <th className="px-4 py-3 text-left font-semibold text-gray-700">Agent</th>
+                        <th className="px-4 py-3 text-center font-semibold text-gray-700">Date</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">SMS</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">Cold Calls</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">Hot Leads</th>
-                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Ofertas</th>
-                        <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-green-50">Contratos</th>
+                        <th className="px-4 py-3 text-right font-semibold text-gray-700">Offers</th>
+                        <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-green-50">Contracts</th>
                         <th className="px-4 py-3 text-right font-semibold text-gray-700">Close Rate</th>
                       </tr>
                     </thead>
@@ -407,7 +407,7 @@ const AgentPerformance = () => {
                         <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
                           <td className="px-4 py-3 font-medium text-gray-900">{row.agent_name}</td>
                           <td className="px-4 py-3 text-center text-gray-600">
-                            {new Date(row.activity_date).toLocaleDateString('pt-BR')}
+                            {new Date(row.activity_date).toLocaleDateString('en-US')}
                           </td>
                           <td className="px-4 py-3 text-right">{formatNumber(row.sms_sent, 0)}</td>
                           <td className="px-4 py-3 text-right">{formatNumber(row.cold_calls_made, 0)}</td>
@@ -425,7 +425,7 @@ const AgentPerformance = () => {
                   </table>
                   {dailyData.length === 0 && (
                     <div className="text-center py-8 text-gray-500">
-                      Nenhum dado encontrado para o filtro selecionado
+                      No data found for the selected filter
                     </div>
                   )}
                 </div>
@@ -436,23 +436,23 @@ const AgentPerformance = () => {
                 <div>
                   <div className="mb-4 p-4 bg-purple-50 border border-purple-200 rounded-lg">
                     <p className="text-sm text-purple-800 font-medium">
-                      ⚠️ Importante: Esta correlação é temporal (mesmo mês). 
-                      Agentes NÃO estão diretamente linkados a campanhas específicas.
+                      ⚠️ Important: This correlation is temporal (same month). 
+                      Agents are NOT directly linked to specific campaigns.
                     </p>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead className="bg-gray-50">
                         <tr>
-                          <th className="px-4 py-3 text-left font-semibold text-gray-700">Agente</th>
-                          <th className="px-4 py-3 text-center font-semibold text-gray-700">Mês</th>
-                          <th className="px-4 py-3 text-right font-semibold text-gray-700">Ofertas</th>
-                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-green-50">Contratos</th>
+                          <th className="px-4 py-3 text-left font-semibold text-gray-700">Agent</th>
+                          <th className="px-4 py-3 text-center font-semibold text-gray-700">Month</th>
+                          <th className="px-4 py-3 text-right font-semibold text-gray-700">Offers</th>
+                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-green-50">Contracts</th>
                           <th className="px-4 py-3 text-right font-semibold text-gray-700">Close Rate</th>
-                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-purple-50">Leads Pipeline</th>
-                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-purple-50">Custo Pipeline</th>
-                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-purple-50">Custo/Contrato</th>
-                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-purple-50">ROI Est.</th>
+                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-purple-50">Pipeline Leads</th>
+                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-purple-50">Pipeline Cost</th>
+                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-purple-50">Cost/Contract</th>
+                          <th className="px-4 py-3 text-right font-semibold text-gray-700 bg-purple-50">Est. ROI</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -460,7 +460,7 @@ const AgentPerformance = () => {
                           <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
                             <td className="px-4 py-3 font-medium text-gray-900">{row.agent_name}</td>
                             <td className="px-4 py-3 text-center text-gray-600">
-                              {new Date(row.month).toLocaleDateString('pt-BR', { year: 'numeric', month: 'short' })}
+                              {new Date(row.month).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
                             </td>
                             <td className="px-4 py-3 text-right">{formatNumber(row.total_offers_sent, 0)}</td>
                             <td className="px-4 py-3 text-right font-bold text-green-600 bg-green-50">
@@ -485,7 +485,7 @@ const AgentPerformance = () => {
                     </table>
                     {pipelineData.length === 0 && (
                       <div className="text-center py-8 text-gray-500">
-                        Nenhum dado encontrado para o filtro selecionado
+                        No data found for the selected filter
                       </div>
                     )}
                   </div>
